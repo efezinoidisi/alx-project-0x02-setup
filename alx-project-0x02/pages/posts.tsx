@@ -2,24 +2,26 @@ import PostCard from '@/components/common/PostCard';
 import Header from '@/components/layout/Header';
 import { PostProps } from '@/interfaces';
 
+type Props = Omit<PostProps, 'content'> & {
+  body: string;
+  id: number;
+};
 const Posts: React.FC<{
-  posts: PostProps[];
+  posts: Props[];
 }> = ({ posts }) => {
-  console.log(posts);
-
   return (
     <>
       <Header />
       <main className='px-5 md:px-10 lg:px-20'>
-        <div>
+        <div className='mb-7'>
           <h1>Posts page</h1>
         </div>
-        <div>
+        <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-8'>
           {posts?.map((post) => (
             <PostCard
-              key={post.title}
+              key={post.id}
               title={post.title}
-              content={post.content}
+              content={post.body}
               userId={post.userId}
             />
           ))}
